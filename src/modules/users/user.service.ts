@@ -51,7 +51,7 @@ const getAllUsers = async (filters: any) => {
 };
 
 const getSingleUser = async (id: string) => {
-  const result = await Users.findById(id).lean();
+  const result = await Users.findById({ _id: id }).lean();
   return result;
 };
 
