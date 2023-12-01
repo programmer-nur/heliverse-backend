@@ -55,8 +55,14 @@ const getSingleUser = async (id: string) => {
   return result;
 };
 
+const deleteUser = async (id: string) => {
+  const result = await Users.deleteOne({ _id: id });
+  return result;
+};
+
 export const UserService = {
   createUser,
   getAllUsers,
   getSingleUser,
+  deleteUser,
 };
