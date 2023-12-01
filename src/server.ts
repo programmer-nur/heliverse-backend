@@ -1,7 +1,6 @@
-/* eslint-disable no-console */
 import mongoose from "mongoose";
 import { Server } from "http";
-import express, { Application, NextFunction, Request, Response } from "express";
+import express, { Application } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
