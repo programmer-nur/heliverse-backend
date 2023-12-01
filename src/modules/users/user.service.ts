@@ -50,7 +50,13 @@ const getAllUsers = async (filters: any) => {
   };
 };
 
+const getSingleUser = async (id: string) => {
+  const result = await Users.findById(id).lean();
+  return result;
+};
+
 export const UserService = {
   createUser,
   getAllUsers,
+  getSingleUser,
 };
