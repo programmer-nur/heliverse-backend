@@ -3,12 +3,15 @@ import { Server } from "http";
 import express, { Application } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import router from "./modules/users/user.route";
 dotenv.config();
 const app: Application = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use("/api", router);
 
 let server: Server;
 async function main() {
