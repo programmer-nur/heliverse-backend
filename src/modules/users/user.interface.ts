@@ -1,6 +1,6 @@
 import { Model } from "mongoose";
 
-export interface IUser {
+export type IUser = {
   id: number;
   first_name: string;
   last_name: string;
@@ -9,6 +9,6 @@ export interface IUser {
   avatar: string;
   domain: string;
   available: boolean;
-}
+};
 
 export type UserModel = Model<IUser, Record<string, unknown>>;

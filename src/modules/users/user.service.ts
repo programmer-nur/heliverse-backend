@@ -1,8 +1,8 @@
-import { IPageOptions, pagination } from "../../utils/pagination";
+import { pagination } from "../../utils/pagination";
 import { IUser } from "./user.interface";
 import { Users } from "./user.model";
 
-const createUser = async (userData: IUser) => {
+const createUser = async (userData: IUser): Promise<IUser> => {
   const result = await Users.create(userData);
   return result;
 };
@@ -10,6 +10,12 @@ const createUser = async (userData: IUser) => {
 const getAllUsers = async (filters: any) => {
   const { searchTerm, ...filterData } = filters;
   const userSearchableFiled = ["first_name", "last_name"];
+  const paginationData = {
+    page: Number(filterData.page),
+    limit: Number(filterData.limit),
+  };
+  const { page, limit, skip } = pagination.calculatePagination(paginationData);
+
   const mainCondition = [];
 
   if (searchTerm) {
@@ -23,7 +29,7 @@ const getAllUsers = async (filters: any) => {
     });
   }
 
-  if (filterData.email || filterData.domain || filterData.available) {
+  if (filterData.gender || filterData.domain || filterData.available) {
     mainCondition.push({
       $and: Object.entries(filterData).map(([field, value]) => ({
         [field]: value,
@@ -31,7 +37,6 @@ const getAllUsers = async (filters: any) => {
     });
   }
 
-  const { page, limit, skip } = pagination.calculatePagination(filterData);
   const whereConditions =
     mainCondition.length > 0 ? { $and: mainCondition } : {};
   const result = await Users.find(whereConditions)

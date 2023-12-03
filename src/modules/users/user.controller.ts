@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { UserService } from "./user.service";
 
-const createUser = async (req: Request, res: Response, next: NextFunction) => {
+const createUser = async (req: Request, res: Response) => {
   try {
     const result = await UserService.createUser(req.body);
     res.send({
@@ -14,7 +14,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+const getAllUsers = async (req: Request, res: Response) => {
   try {
     const result = await UserService.getAllUsers(req.query);
     res.send({
@@ -28,11 +28,7 @@ const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const getSingleUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const getSingleUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
@@ -46,7 +42,7 @@ const getSingleUser = async (
     res.send(error);
   }
 };
-const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
+const deleteUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const result = await UserService.deleteUser(id);
@@ -60,7 +56,7 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+const updateUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const userData = req.body;

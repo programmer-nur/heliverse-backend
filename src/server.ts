@@ -3,7 +3,8 @@ import { Server } from "http";
 import express, { Application } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import router from "./modules/users/user.route";
+import { userRoutes } from "./modules/users/user.route";
+import { TeamRoutes } from "./modules/team/team.route";
 dotenv.config();
 const app: Application = express();
 
@@ -11,7 +12,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", router);
+app.use("/api/users", userRoutes);
+app.use("/api/team", TeamRoutes);
 
 let server: Server;
 async function main() {

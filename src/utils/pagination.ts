@@ -1,8 +1,8 @@
 import { SortOrder } from "mongoose";
 
 export type IPageOptions = {
-  page?: number;
-  limit?: number;
+  page?: number | string;
+  limit?: number | string;
 };
 
 type IPageOptionsResults = {
