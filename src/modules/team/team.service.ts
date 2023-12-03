@@ -1,16 +1,13 @@
-import { Response } from "express";
 import { Users } from "../users/user.model";
 import { ITeam } from "./team.interface";
 import { Team } from "./team.model";
 
 const createTeam = async (userIds: string[]): Promise<ITeam> => {
   const users = await Users.find({ _id: { $in: userIds } });
-
   const team = await Team.create({
     name,
     users: users.map((user) => user._id),
   });
-
   return team;
 };
 
